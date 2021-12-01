@@ -31,7 +31,7 @@ WITH SERDEPROPERTIES (
     "timestamp.formats" = "MM/dd/yyyy hh:mm:ss a"
 )
 STORED AS TEXTFILE
-LOCATION '/tmp/rohithj/chicagocrime.csv'
+LOCATION '/tmp/rohithj'
 TBLPROPERTIES("skip.header.line.count"="1");
 
 -- Making an orc table
@@ -57,7 +57,7 @@ CREATE EXTERNAL TABLE rohithj_crimes(
     xcoord bigint,
     ycoord bigint,
     crime_year int,
-    updated_on timestamp
+    updated_on timestamp,
     latitude decimal(10, 8),
     longitude decimal(10, 8),
     crime_location string
@@ -92,7 +92,7 @@ SELECT
     longitude,
     crime_location
 
-FROM rohith_crimes_csv
+FROM rohithj_crimes_csv
 WHERE crime_date is not null and block is not null
     and arrest is not null and domestic is not null
     and crime_year is not null;
