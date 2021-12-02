@@ -12,7 +12,7 @@ val delays_yearly = spark.sql("""
 select block as block, count(1) as total_crimes,
   count(if(arrest, 1, null)) as total_arrests,
   count(if(domestic, 1, null)) as total_domestic,
-  year as year
+  crime_year as year
   from rohithj_crimes
   group by block, year""");
   

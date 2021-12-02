@@ -1,0 +1,38 @@
+version: 0.0
+os: linux
+
+files:
+  - source: /src
+    destination: /home/rohithj/CodeDeploy/crime
+    
+permissions:
+  - object: /home/rohithj/CodeDeploy/crime/
+    pattern: "**"
+    owner: rohithj
+    group: rohithj
+
+  - object: /home/rohithj/CodeDeploy
+    pattern: "crime"
+    owner: rohithj
+    group: rohithj
+    type:
+      - directory
+
+hooks:
+  ApplicationStop:
+    - location: bin/application_stop.sh
+      timeout: 15
+      runas: rohithj
+  BeforeInstall:
+    - location: bin/before_install.sh
+      timeout: 120
+      runas: rohithj
+  AfterInstall:
+    - location: bin/after_install.sh
+      timeout: 1200
+      runas: rohithj
+  ApplicationStart:
+    - location: bin/application_start.sh
+      timeout: 120
+      runas: rohithj
+

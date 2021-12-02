@@ -63,22 +63,21 @@ CREATE EXTERNAL TABLE rohithj_crimes(
     crime_location string
 )
     stored as orc;
-
-    -- transfer data to orc table
-
+    
+    
 INSERT OVERWRITE TABLE rohithj_crimes
 SELECT
 
     id,
     case_number,
     from_unixtime(unix_timestamp(crime_date,"MM/dd/yyyy hh:mm:ss a")),
-    block,
+    SUBSTRING(block, LOCATE(' ', block)+1),
     iucr,
     primary_type,
     description,
     location_desc,
-    CAST(arrest='true' AS unsigned),
-    CAST(domestic='true' AS unsigned),
+    arrest='true',
+    domestic='true',
     beat,
     district,
     ward,
