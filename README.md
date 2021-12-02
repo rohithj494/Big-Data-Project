@@ -29,7 +29,7 @@ It also uses a front-end web app to convert output to a graphical interface.
 
 The batch layer stores the master datasets `rohithj_crimes_csv` and `rohithj_crimes` in HDFS hosted in Amazon Web Services. 
 It ingests the raw historical data through bash scripts and creates Hive tables containg the raw csv data. These are then copied 
-and stored in ORC file format.
+and stored in ORC file format. ORC file formate is good for contiguous read purposes due to the storage mechanism.
 
 #### Serving Layer
 
@@ -37,6 +37,7 @@ The serving layer takes the ORC tables in Hive, which were created in the batch 
 are pre-computed and called through ad-hoc queries that are requested from the web app.
 The Hbase tables used in the webapp are `rohithj_total` and `rohithj_yearly`.
 
+I used both HQL and scala to compute batch views to demonstrate the different ways to do them. The Hive tables `rohithj_total` and `rohithj_yearly` were built through scala (crimes_to_hive.scala)
 
 #### Web App
 
